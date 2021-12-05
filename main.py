@@ -2,13 +2,18 @@ import tkinter as tk
 from tkinter import *
 import sqlite3
 
+import random
+import time
+
+#import tearapist
+
 class Tearapy(tk.Tk):
 
 	def __init__(self, *args, **kwargs):
 		tk.Tk.__init__(self, *args, **kwargs)
 
 		self.title('Tearapy')
-		self.geometry('600x400')
+		self.geometry('300x500')
 		self.eval('tk::PlaceWindow . center')
 
 		container = tk.Frame(self)
@@ -48,25 +53,23 @@ class Chat(tk.Frame):
 	def __init__(self, parent, controller): 
 		tk.Frame.__init__(self, parent)
 		self.controller = controller
-		text = Label(self, text = "Start talking to the bot! Type 'quit' to stop.")
+		text = Label(self, text = "Start talking to the bot! Type 'quit' to stop.") #add QUIT option
 		text.pack(side="top", fill="x", pady=10)
 
-		#USER TALKING
-		def send():
+		responses = ["hello", "dorou", "kudai"] #TODO - connect ChatBot
+
+		def send(): #TODO separate printing user reply from bot giving an example
 			u_message = Label(self, text = "You: " + message_box.get())
 			u_message.pack()
+
+			bot_message = Label(self, text = "Tearapist: " + str(random.choice(responses)))
+			bot_message.pack()
 
 		message_box = Entry(self, width=30)
 		message_box.pack()
 
-		button_send = Button(self, text = "send", command = send)
+		button_send = Button(self, text = "send", command = send) 
 		button_send.pack()
-
-		#TODO: MACHINE REPLY
-
-
-		
-
 
 if __name__ == "__main__":
     root = Tearapy()
